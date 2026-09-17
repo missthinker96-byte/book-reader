@@ -16,11 +16,14 @@ button{background:#4a3f35;color:white;border:none;padding:.6rem 1rem;border-radi
 </head>
 <body>
 <header><h1>📚 Book Reader</h1><p>Your free library</p></header>
+ <div style="text-align:center; margin:10px">
+  <input type="file" id="pdfUpload" accept="application/pdf">
+</div>
 <div id="books"></div>
 <div id="reader"><button onclick="goBack()">← Back</button><h2 id="title"></h2><div id="content"></div></div>
 <script>
 const books=[
-{title:"Pride and Prejudice",text:"It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife... [Sample chapter 1. Add your full text here.]"},
+{title:"25 Year of Truth",text:"It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife... [Sample chapter 1. Add your full text here.]"},
 {title:"Moby Dick",text:"Call me Ishmael. Some years ago — never mind how long precisely — having little or no money in my purse..."},
 {title:"Sherlock Holmes",text:"To Sherlock Holmes she is always the woman. I have seldom heard him mention her under any other name..."}
 ];
@@ -41,6 +44,16 @@ function goBack(){
  document.getElementById('reader').style.display='none';
  document.getElementById('books').style.display='grid';
 }
+ document.getElementById('pdfUpload').addEventListener('change', function(e){
+  const file = e.target.files[0];
+  if(file){
+    const url = URL.createObjectURL(file);
+    document.getElementById('reader').style.display='block';
+    document.getElementById('title').innerText = file.name;
+    document.getElementById('content').innerHTML = `<embed src="${url}" type="application/pdf" width="100%" height="600px">`;
+    document.getElementById('books').style.display='none';
+  }
+});
 </script>
 </body>
 </html>

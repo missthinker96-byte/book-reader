@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Reader</title>
+<style>
+body{font-family:system-ui;margin:0;background:#f5f1e8;color:#333}
+header{background:#4a3f35;color:white;padding:1rem;text-align:center}
+#books{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem;padding:1rem}
+.card{background:white;border-radius:12px;padding:1rem;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.card h3{font-size:1rem;margin:.5rem 0}
+button{background:#4a3f35;color:white;border:none;padding:.6rem 1rem;border-radius:8px;cursor:pointer}
+#reader{display:none;padding:2rem;max-width:700px;margin:auto;line-height:1.8;font-size:1.1rem;background:white;min-height:100vh}
+</style>
+</head>
+<body>
+<header><h1>📚 Book Reader</h1><p>Your free library</p></header>
+<div id="books"></div>
+<div id="reader"><button onclick="goBack()">← Back</button><h2 id="title"></h2><div id="content"></div></div>
+<script>
+const books=[
+{title:"Pride and Prejudice",text:"It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife... [Sample chapter 1. Add your full text here.]"},
+{title:"Moby Dick",text:"Call me Ishmael. Some years ago — never mind how long precisely — having little or no money in my purse..."},
+{title:"Sherlock Holmes",text:"To Sherlock Holmes she is always the woman. I have seldom heard him mention her under any other name..."}
+];
+const grid=document.getElementById('books');
+books.forEach((b,i)=>{
+ const d=document.createElement('div');d.className='card';
+ d.innerHTML=`<div style="font-size:3rem">📖</div><h3>${b.title}</h3><button onclick="openBook(${i})">Read</button>`;
+ grid.appendChild(d);
+});
+function openBook(i){
+ document.getElementById('books').style.display='none';
+ document.getElementById('reader').style.display='block';
+ document.getElementById('title').innerText=books[i].title;
+ document.getElementById('content').innerText=books[i].text;
+ window.scrollTo(0,0);
+}
+function goBack(){
+ document.getElementById('reader').style.display='none';
+ document.getElementById('books').style.display='grid';
+}
+</script>
+</body>
+</html>

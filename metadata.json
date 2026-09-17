@@ -1,0 +1,6 @@
+{
+  "name": "Book Reader",
+  "description": "Digital library and PDF reader app with Firebase Firestore, Storage, and Admin management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
